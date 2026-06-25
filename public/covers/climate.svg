@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" role="img" aria-label="Climate">
+	<rect width="400" height="240" fill="#e1ebe0" />
+	<path d="M48 200 L352 200" stroke="#5d7d58" stroke-width="4" opacity="0.5" stroke-linecap="round" />
+	<path d="M48 78 L130 116 L210 152 L300 184" fill="none" stroke="#5d7d58" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+	<circle cx="324" cy="194" r="11" fill="#5d7d58" />
+</svg>

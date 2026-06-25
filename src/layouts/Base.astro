@@ -1,0 +1,38 @@
+---
+import type { ImageMetadata } from 'astro';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+	title: string;
+	description: string;
+	image?: ImageMetadata;
+	// 'wide' for grids/landing, 'narrow' for reading.
+	width?: 'wide' | 'narrow';
+}
+
+const { title, description, image, width = 'wide' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} image={image} />
+		<slot name="head" />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class={width === 'narrow' ? 'wrap wrap--narrow' : 'wrap'}>
+				<slot />
+			</div>
+		</main>
+		<Footer />
+		<style>
+			.wrap--narrow {
+				width: var(--measure);
+			}
+		</style>
+	</body>
+</html>

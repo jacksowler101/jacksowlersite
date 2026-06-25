@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+const writing = (await getCollection('writing'))
+	.filter((p) => !p.data.draft)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Base
+	title="Writing — Jack Sowler"
+	description="Essays and guides on energy, climate, AI, policy and science."
+>
+	<p class="eyebrow">Writing</p>
+	<h1>Writing</h1>
+	<p class="lead">
+		Essays and guides — energy, climate, AI, policy and the occasional tangent. I try to make the
+		complicated bits genuinely clear.
+	</p>
+	{
+		writing.length === 0 ? (
+			<p class="muted">Coming soon.</p>
+		) : (
+			<ul class="card-grid">
+				{writing.map((w) => (
+					<li>
+						<ProjectCard
+							href={`/writing/${w.id}/`}
+							title={w.data.title}
+							description={w.data.description}
+							cover={w.data.cover}
+							disciplines={w.data.disciplines}
+						/>
+					</li>
+				))}
+			</ul>
+		)
+	}
+	<style>
+		.lead {
+			font-size: 1.1rem;
+			color: var(--ink-soft);
+			max-width: 44rem;
+			margin: 0 0 0.5em 0;
+		}
+		.muted {
+			color: var(--ink-soft);
+		}
+	</style>
+</Base>

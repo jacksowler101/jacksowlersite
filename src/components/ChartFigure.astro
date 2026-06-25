@@ -1,0 +1,53 @@
+---
+// Wraps an interactive chart (or any figure) with a consistent title,
+// caption and source line — so every infographic on the site looks the
+// same and always carries a clear data provenance note.
+interface Props {
+	title?: string;
+	caption?: string;
+	source?: string;
+}
+const { title, caption, source } = Astro.props;
+---
+
+<figure class="figure">
+	{title && <figcaption class="figure__title">{title}</figcaption>}
+	<div class="figure__chart"><slot /></div>
+	{caption && <p class="figure__caption">{caption}</p>}
+	{source && <p class="figure__source">{source}</p>}
+</figure>
+<style>
+	.figure {
+		margin: 2.2em 0;
+		padding: 1.3em 1.3em 1.1em 1.3em;
+		border: 1px solid var(--rule);
+		border-radius: 6px;
+		background: var(--paper-raised);
+	}
+	.figure__title {
+		font-family: var(--font-display);
+		font-weight: 600;
+		font-size: 1.2rem;
+		line-height: 1.25;
+		color: var(--ink);
+		margin: 0 0 0.7em 0;
+	}
+	.figure__chart {
+		margin: 0;
+	}
+	.figure__caption {
+		font-family: var(--font-sans);
+		font-size: 0.85rem;
+		color: var(--ink-soft);
+		line-height: 1.5;
+		margin: 0.9em 0 0 0;
+	}
+	.figure__source {
+		font-family: var(--font-sans);
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--ink-faint);
+		margin: 0.5em 0 0 0;
+	}
+</style>

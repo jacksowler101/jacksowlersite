@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" role="img" aria-label="Energy">
+	<rect width="400" height="240" fill="#f3e2d6" />
+	<path d="M40 185 L110 140 L170 162 L230 110 L290 132 L360 92 L360 200 L40 200 Z" fill="#b5572f" opacity="0.22" />
+	<polyline points="40,185 110,140 170,162 230,110 290,132 360,92" fill="none" stroke="#b5572f" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

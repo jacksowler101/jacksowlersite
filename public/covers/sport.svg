@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" role="img" aria-label="Sport">
+	<rect width="400" height="240" fill="#fbeede" />
+	<g fill="none" stroke="#b3742a" stroke-width="5" stroke-linecap="round">
+		<path d="M110 196 A92 92 0 0 1 290 196" />
+		<line x1="60" y1="196" x2="340" y2="196" />
+	</g>
+	<g fill="#b3742a">
+		<circle cx="200" cy="118" r="15" />
+		<circle cx="150" cy="150" r="6" />
+		<circle cx="250" cy="150" r="6" />
+		<circle cx="200" cy="172" r="6" />
+		<circle cx="122" cy="178" r="6" />
+		<circle cx="278" cy="178" r="6" />
+	</g>
+</svg>

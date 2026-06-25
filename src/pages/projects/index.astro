@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+const statusOrder = { live: 0, 'in-progress': 1, planned: 2 };
+const projects = (await getCollection('projects'))
+	.filter((p) => !p.data.draft)
+	.sort(
+		(a, b) =>
+			b.data.order - a.data.order || statusOrder[a.data.status] - statusOrder[b.data.status],
+	);
+
+const projectHref = (p) => p.data.externalUrl ?? `/projects/${p.id}/`;
+---
+
+<Base
+	title="Projects — Jack Sowler"
+	description="Interactive tools, data visualisations and experiments."
+>
+	<p class="eyebrow">Projects</p>
+	<h1>Projects</h1>
+	<p class="lead">
+		Interactive tools, data visualisations and experiments — some live, some in progress, some still
+		just ideas I want to build.
+	</p>
+	<ul class="card-grid">
+		{
+			projects.map((p) => (
+				<li>
+					<ProjectCard
+						href={projectHref(p)}
+						external={!!p.data.externalUrl}
+						title={p.data.title}
+						description={p.data.description}
+						cover={p.data.cover}
+						disciplines={p.data.disciplines}
+						status={p.data.status}
+					/>
+				</li>
+			))
+		}
+	</ul>
+	<style>
+		.lead {
+			font-size: 1.1rem;
+			color: var(--ink-soft);
+			max-width: 44rem;
+			margin: 0 0 0.5em 0;
+		}
+	</style>
+</Base>

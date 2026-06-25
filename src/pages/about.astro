@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE_AUTHOR, LINKEDIN_URL, GITHUB_URL } from '../consts';
+---
+
+<Base title="About — Jack Sowler" description="About Jack Sowler — energy modeller and builder of interactive data projects." width="narrow">
+	<p class="eyebrow">About</p>
+	<h1>About</h1>
+	<p>
+		Hi, I'm {SITE_AUTHOR}. I currently work in energy modelling, where I spend my time working out how
+		the power system behaves — and how it pays for itself.
+	</p>
+	<p>
+		This site is where I think out loud. I'm interested in a good deal more than electricity markets:
+		data and visualisation, AI, climate and climate policy, the occasional bit of science, and — when
+		the mood takes me — a sport project or two. Some of that becomes <a href="/writing">writing</a>;
+		some of it becomes an <a href="/projects">interactive project</a> you can actually poke at.
+	</p>
+	<p>
+		My aim with everything here is the same: take something complex and make it genuinely explorable,
+		rather than just described.
+	</p>
+	<p>
+		You can find me on <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">LinkedIn</a> and
+		<a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">GitHub</a>. I'd welcome feedback,
+		ideas or corrections.
+	</p>
+</Base>

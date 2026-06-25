@@ -1,0 +1,33 @@
+---
+title: 'GB generation mix explorer'
+description: 'An interactive look at how Great Britain meets electricity demand across a day — and why gas is the swing fuel.'
+status: 'live'
+disciplines: ['Energy', 'Data viz']
+cover: '/covers/energy.svg'
+order: 100
+date: 'Jun 24 2026'
+---
+
+import GenerationMixChart from '../../components/charts/GenerationMixChart.jsx';
+import ChartFigure from '../../components/ChartFigure.astro';
+
+Great Britain's electricity demand rises and falls across the day — low overnight, with peaks
+in the morning and early evening. A changing mix of sources rises and falls to meet it. The one
+idea worth holding onto is that **gas (CCGT) is the residual plant**: it runs to fill whatever
+gap is left once wind, solar, nuclear, imports and the rest have generated. So the amount of gas
+we burn — and, with it, the price we pay — depends enormously on how windy the day is.
+
+<ChartFigure
+	title="GB generation mix across a representative day"
+	caption="Switch between a high-wind and a low-wind day, and click items in the legend to add or remove them. Notice how much more gas (CCGT) is needed when the wind drops."
+	source="Illustrative sample data — for demonstration only"
+>
+	<GenerationMixChart client:only="react" />
+</ChartFigure>
+
+On the low-wind day, the grey gas band swells to keep the lights on; on the high-wind day it
+shrinks back. That residual relationship sits at the heart of GB power prices, and it's the kind
+of thing that's far easier to *feel* by toggling a control than to absorb from a paragraph.
+
+This is a small demonstration built with real chart tooling but illustrative numbers. It's the
+template for the kind of interactive piece I want to build here — next with real, sourced data.

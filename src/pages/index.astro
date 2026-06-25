@@ -1,0 +1,123 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { SITE_TITLE, SITE_DESCRIPTION, SITE_INTRO } from '../consts';
+
+const statusOrder = { live: 0, 'in-progress': 1, planned: 2 };
+const projects = (await getCollection('projects'))
+	.filter((p) => !p.data.draft)
+	.sort(
+		(a, b) =>
+			b.data.order - a.data.order || statusOrder[a.data.status] - statusOrder[b.data.status],
+	);
+const writing = (await getCollection('writing'))
+	.filter((p) => !p.data.draft)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const featuredProjects = projects.slice(0, 6);
+const recentWriting = writing.slice(0, 4);
+
+const projectHref = (p) => p.data.externalUrl ?? `/projects/${p.id}/`;
+---
+
+<Base title={SITE_TITLE} description={SITE_DESCRIPTION}>
+	<section class="hero">
+		<h1 class="hero__name">{SITE_TITLE}</h1>
+		<p class="hero__intro">{SITE_INTRO}</p>
+	</section>
+
+	<section class="block">
+		<div class="block__head">
+			<h2>Projects</h2>
+			<a class="block__more" href="/projects">All projects →</a>
+		</div>
+		<ul class="card-grid">
+			{
+				featuredProjects.map((p) => (
+					<li>
+						<ProjectCard
+							href={projectHref(p)}
+							external={!!p.data.externalUrl}
+							title={p.data.title}
+							description={p.data.description}
+							cover={p.data.cover}
+							disciplines={p.data.disciplines}
+							status={p.data.status}
+						/>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+
+	<section class="block">
+		<div class="block__head">
+			<h2>Writing</h2>
+			<a class="block__more" href="/writing">All writing →</a>
+		</div>
+		{
+			recentWriting.length === 0 ? (
+				<p class="muted">Coming soon.</p>
+			) : (
+				<ul class="card-grid">
+					{recentWriting.map((w) => (
+						<li>
+							<ProjectCard
+								href={`/writing/${w.id}/`}
+								title={w.data.title}
+								description={w.data.description}
+								cover={w.data.cover}
+								disciplines={w.data.disciplines}
+							/>
+						</li>
+					))}
+				</ul>
+			)
+		}
+	</section>
+	<style>
+		.hero {
+			padding: 1em 0 2.4em 0;
+			max-width: 46rem;
+		}
+		.hero__name {
+			font-size: 3rem;
+			margin: 0 0 0.2em 0;
+		}
+		.hero__intro {
+			font-size: 1.2rem;
+			color: var(--ink-soft);
+			line-height: 1.55;
+			margin: 0;
+		}
+		.block {
+			margin-top: 2.6em;
+		}
+		.block__head {
+			display: flex;
+			align-items: baseline;
+			justify-content: space-between;
+			gap: 1em;
+			border-bottom: 1px solid var(--rule);
+			padding-bottom: 0.4em;
+		}
+		.block__head h2 {
+			margin: 0;
+			font-size: 1.6rem;
+		}
+		.block__more {
+			font-family: var(--font-sans);
+			font-size: 0.9rem;
+			color: var(--ink-soft);
+			text-decoration: none;
+			white-space: nowrap;
+		}
+		.block__more:hover {
+			color: var(--accent);
+		}
+		.muted {
+			color: var(--ink-soft);
+		}
+	</style>
+</Base>

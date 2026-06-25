@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "gb-power-insights",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "C:/Users/JackSowler/gb-power-insights", "run", "dev"],
+      "port": 4321
+    }
+  ]
+}

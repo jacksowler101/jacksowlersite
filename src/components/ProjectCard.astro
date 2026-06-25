@@ -1,0 +1,46 @@
+---
+interface Props {
+	href?: string;
+	external?: boolean;
+	title: string;
+	description: string;
+	cover?: string;
+	disciplines?: string[];
+	status?: 'live' | 'in-progress' | 'planned';
+}
+
+const { href, external, title, description, cover, disciplines = [], status } = Astro.props;
+const Tag = href ? 'a' : 'div';
+const statusLabel =
+	status === 'in-progress'
+		? 'In progress'
+		: status === 'planned'
+			? 'Planned'
+			: status === 'live'
+				? 'Live'
+				: '';
+---
+
+<Tag
+	class="card"
+	href={href}
+	{...external ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+>
+	{cover && <img class="card__cover" src={cover} alt="" loading="lazy" width="400" height="240" />}
+	<div class="card__body">
+		<h3 class="card__title">{title}</h3>
+		<p class="card__desc">{description}</p>
+		<div class="card__meta">
+			{status && <span class={`badge badge--${status}`}>{statusLabel}</span>}
+			{
+				disciplines.length > 0 && (
+					<span class="disciplines">
+						{disciplines.map((d) => (
+							<span class="discipline">{d}</span>
+						))}
+					</span>
+				)
+			}
+		</div>
+	</div>
+</Tag>
