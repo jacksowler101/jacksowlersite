@@ -9,7 +9,7 @@ import react from '@astrojs/react';
 // https://astro.build/config
 export default defineConfig({
 	// TODO: change to your real domain once you deploy (used for canonical URLs, sitemap and RSS).
-	site: 'https://jacksowler.example',
+	site: 'https://jacksowler.dev',
 	integrations: [mdx(), sitemap(), react()],
 	fonts: [
 		{

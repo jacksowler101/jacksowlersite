@@ -1,0 +1,6 @@
+# Cloudflare Workers static site config
+name = "jacksowlersite"
+compatibility_date = "2026-06-25"
+
+[assets]
+directory = "./dist"
